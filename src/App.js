@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import "./index.css";
 import {
     Box,
     Button,
@@ -15,28 +16,67 @@ import quizData from "./questions.js";
 
 function App() {
     const [answers, setAnswers] = useState({});
-    const [score, setScore] = useState(null);
+    const [score, setScore] = useState(0);
     const [selectedExam, setSelectedExam] = useState(1);
+    const [randomQuestions, setRandomQuestions] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0); // index câu đang làm (cho đề 1-4)
+    const [showResult, setShowResult] = useState(false);
+    const [answered, setAnswered] = useState(false); // đã bấm "Trả lời" chưa
 
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+    // random đề
+    const handleRandomExam = () => {
+        const shuffled = [...quizData].sort(() => Math.random() - 0.5);
+        setRandomQuestions(shuffled.slice(0, 30));
+        setSelectedExam(null);
+        setScore(0);
+        setAnswers({});
+        setShowResult(false);
+        setCurrentIndex(0);
+    };
+
+    // tính câu hỏi đang hiển thị
+    const startIndex = (selectedExam - 1) * 30;
+    const endIndex = startIndex + 30;
+    const visibleQuestions = randomQuestions.length > 0 ? randomQuestions : quizData.slice(startIndex, endIndex);
+
+    const currentQuestion = randomQuestions.length > 0 ? null : visibleQuestions[currentIndex]; // chỉ dùng cho đề 1-4
 
     const handleChange = (qIndex, value) => {
         setAnswers({ ...answers, [qIndex]: value });
     };
 
-    const handleSubmit = () => {
-        let newScore = 0;
-        visibleQuestions.forEach((q, index) => {
-            const globalIndex = (selectedExam - 1) * 30 + index;
-            if (answers[globalIndex] === q.answer) newScore++;
-        });
-        setScore(newScore);
+    // bấm Trả lời
+    const handleSubmitAnswer = () => {
+        if (answered) return;
+        const globalIndex = startIndex + currentIndex;
+        if (answers[globalIndex] === currentQuestion.answer) {
+            setScore((prev) => prev + 1);
+        }
+        setAnswered(true);
     };
 
-    const startIndex = (selectedExam - 1) * 30;
-    const endIndex = startIndex + 30;
-    const visibleQuestions = quizData.slice(startIndex, endIndex);
+    // bấm Next
+    const handleNext = () => {
+        if (currentIndex < 29) {
+            setCurrentIndex(currentIndex + 1);
+            setAnswered(false);
+        } else {
+            setShowResult(true);
+        }
+    };
+
+    // random mode → giữ nguyên kiểu cũ (30 câu cùng lúc)
+    const handleSubmitRandom = () => {
+        let newScore = 0;
+        randomQuestions.forEach((q, index) => {
+            if (answers[index] === q.answer) newScore++;
+        });
+        setScore(newScore);
+        setShowResult(true);
+    };
 
     return (
         <Box
@@ -50,7 +90,7 @@ function App() {
                 flexDirection: isMobile ? "column" : "row",
             }}
         >
-            {/* Sidebar or Topbar */}
+            {/* Sidebar */}
             <Box
                 sx={{
                     bgcolor: "#E5F1DB",
@@ -60,9 +100,11 @@ function App() {
                     borderRight: isMobile ? "none" : "2px solid #C8E0B2",
                     borderBottom: isMobile ? "2px solid #C8E0B2" : "none",
                     display: "flex",
+                    flexDirection: isMobile ? "row" : "column",
+                    alignItems: isMobile ? "center" : "stretch",
                     justifyContent: isMobile ? "center" : "flex-start",
                     gap: 1,
-                    flexWrap: "wrap",
+                    flexWrap: isMobile ? "wrap" : "nowrap",
                 }}
             >
                 <Typography
@@ -72,7 +114,7 @@ function App() {
                         color: "#4D8009",
                         mb: isMobile ? 1 : 2,
                         width: "100%",
-                        textAlign: isMobile ? "center" : "left",
+                        textAlign: "center",
                     }}
                 >
                     Danh sách đề thi
@@ -82,6 +124,7 @@ function App() {
                     <Button
                         key={exam}
                         variant={selectedExam === exam ? "contained" : "outlined"}
+                        fullWidth={!isMobile}
                         sx={{
                             borderRadius: "10px",
                             fontWeight: "600",
@@ -94,118 +137,157 @@ function App() {
                         }}
                         onClick={() => {
                             setSelectedExam(exam);
-                            setScore(null);
+                            setRandomQuestions([]);
+                            setScore(0);
                             setAnswers({});
+                            setShowResult(false);
+                            setCurrentIndex(0);
+                            setAnswered(false);
                         }}
                     >
                         Đề {exam}
                     </Button>
                 ))}
+
+                <Button
+                    variant={randomQuestions.length > 0 ? "contained" : "outlined"}
+                    fullWidth={!isMobile}
+                    sx={{
+                        borderRadius: "10px",
+                        fontWeight: "600",
+                        minWidth: isMobile ? "100px" : "100%",
+                        bgcolor: randomQuestions.length > 0 ? "#4D8009" : "white",
+                        color: randomQuestions.length > 0 ? "white" : "#4D8009",
+                        "&:hover": {
+                            bgcolor: randomQuestions.length > 0 ? "#3b6507" : "#F0F8EB",
+                        },
+                    }}
+                    onClick={handleRandomExam}
+                >
+                    Đề ngẫu nhiên
+                </Button>
             </Box>
 
             {/* Main content */}
-            <Box
-                sx={{
-                    p: isMobile ? 2 : 4,
-                    margin: "0 auto",
-                    maxWidth: "800px",
-                    flexGrow: 1,
-                }}
-            >
+            <Box sx={{ p: isMobile ? 2 : 4, margin: "0 auto", maxWidth: "800px", flexGrow: 1 }}>
                 <Typography
                     variant={isMobile ? "h5" : "h3"}
                     gutterBottom
                     textAlign="center"
                     sx={{ color: "primary.main", fontWeight: "bold", mb: 4 }}
                 >
-                    📝 Ôn luyện chính trị - Đề {selectedExam}
+                    📝 Ôn luyện chính trị {randomQuestions.length > 0 ? "- Đề ngẫu nhiên" : `- Đề ${selectedExam}`}
                 </Typography>
 
-                {visibleQuestions.map((q, index) => {
-                    const globalIndex = startIndex + index;
-                    return (
-                        <Card
-                            key={globalIndex}
-                            sx={{
-                                mb: 3,
-                                boxShadow: 3,
-                                borderRadius: 3,
-                                "&:hover": { transform: "scale(1.01)" },
-                            }}
-                        >
-                            <CardContent>
-                                <Typography variant={isMobile ? "subtitle1" : "h6"} sx={{ mb: 1, fontWeight: "600" }}>
-                                    {index + 1}. {q.question}
-                                </Typography>
-                                <RadioGroup
-                                    value={answers[globalIndex] || ""}
-                                    onChange={(e) => handleChange(globalIndex, e.target.value)}
-                                >
-                                    {q.options.map((option, i) => {
-                                        let optionColor = "inherit";
-                                        if (score !== null) {
-                                            if (option === q.answer) optionColor = "green";
-                                            else if (answers[globalIndex] === option) optionColor = "red";
-                                        }
-
-                                        return (
+                {/* Chế độ random → hiện 30 câu cùng lúc */}
+                {randomQuestions.length > 0 ? (
+                    <>
+                        {visibleQuestions.map((q, index) => (
+                            <Card key={index} sx={{ mb: 3, boxShadow: 3, borderRadius: 3 }}>
+                                <CardContent>
+                                    <Typography component="span" sx={{ mb: 2, display: "block", fontWeight: "600" }}>
+                                        {index + 1}. {q.question}
+                                    </Typography>
+                                    <RadioGroup
+                                        value={answers[index] || ""}
+                                        onChange={(e) => handleChange(index, e.target.value)}
+                                    >
+                                        {q.options.map((option, i) => (
                                             <FormControlLabel
                                                 key={i}
                                                 value={option}
-                                                control={<Radio sx={{ color: optionColor }} />}
-                                                label={
-                                                    <Typography
-                                                        sx={{
-                                                            p: 1,
-                                                            fontSize: isMobile ? "0.9rem" : "1rem",
-                                                            color: optionColor,
-                                                            borderRadius: "8px",
-                                                            backgroundColor:
-                                                                score !== null && option === q.answer
-                                                                    ? "#DFF2E0"
-                                                                    : "transparent",
-                                                        }}
-                                                    >
-                                                        {option}
-                                                    </Typography>
-                                                }
+                                                control={<Radio />}
+                                                label={option}
                                             />
-                                        );
-                                    })}
-                                </RadioGroup>
-                            </CardContent>
-                        </Card>
-                    );
-                })}
+                                        ))}
+                                    </RadioGroup>
+                                </CardContent>
+                            </Card>
+                        ))}
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                    fullWidth
-                    sx={{
-                        py: 1.5,
-                        borderRadius: "12px",
-                        fontSize: isMobile ? "1rem" : "1.1rem",
-                        fontWeight: "bold",
-                        mt: 2,
-                    }}
-                >
-                    Nộp bài
-                </Button>
+                        <Button variant="contained" color="primary" onClick={handleSubmitRandom} fullWidth>
+                            Nộp bài
+                        </Button>
 
-                {score !== null && (
-                    <Typography
-                        variant={isMobile ? "h6" : "h5"}
-                        sx={{
-                            mt: 3,
-                            textAlign: "center",
-                            color: score > visibleQuestions.length / 2 ? "green" : "red",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        ✅ Bạn đúng {score}/{visibleQuestions.length} câu!
-                    </Typography>
+                        {showResult && (
+                            <Typography variant="h5" sx={{ mt: 3, textAlign: "center", fontWeight: "bold" }}>
+                                ✅ Bạn đúng {score}/{visibleQuestions.length} câu!
+                            </Typography>
+                        )}
+                    </>
+                ) : (
+                    // Chế độ đề 1-4 → từng câu
+                    <>
+                        {!showResult ? (
+                            <Card sx={{ mb: 3, boxShadow: 3, borderRadius: 3 }}>
+                                <CardContent>
+                                    <Typography component="span" sx={{ mb: 2, display: "block", fontWeight: "600" }}>
+                                        Câu {currentIndex + 1}: {currentQuestion.question}
+                                    </Typography>
+                                    <RadioGroup
+                                        value={answers[startIndex + currentIndex] || ""}
+                                        onChange={(e) => handleChange(startIndex + currentIndex, e.target.value)}
+                                    >
+                                        {currentQuestion.options.map((option, i) => {
+                                            let optionColor = "inherit";
+                                            if (answered) {
+                                                if (option === currentQuestion.answer) optionColor = "green";
+                                                else if (answers[startIndex + currentIndex] === option)
+                                                    optionColor = "red";
+                                            }
+
+                                            return (
+                                                <FormControlLabel
+                                                    key={i}
+                                                    value={option}
+                                                    control={<Radio sx={{ color: optionColor }} />}
+                                                    disabled={answered} // không cho đổi sau khi trả lời
+                                                    label={
+                                                        <Typography
+                                                            sx={{
+                                                                color: optionColor,
+                                                                backgroundColor:
+                                                                    answered && option === currentQuestion.answer
+                                                                        ? "#DFF2E0"
+                                                                        : "transparent",
+                                                                borderRadius: "8px",
+                                                                p: 0.5,
+                                                            }}
+                                                        >
+                                                            {option}
+                                                        </Typography>
+                                                    }
+                                                />
+                                            );
+                                        })}
+                                    </RadioGroup>
+                                </CardContent>
+                            </Card>
+                        ) : (
+                            <Typography
+                                variant="h5"
+                                sx={{ mt: 3, textAlign: "center", fontWeight: "bold", color: "blue" }}
+                            >
+                                🎉 Kết thúc! Bạn đúng {score}/{visibleQuestions.length} câu!
+                            </Typography>
+                        )}
+
+                        {!showResult && (
+                            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={handleSubmitAnswer}
+                                    disabled={answered}
+                                >
+                                    Trả lời
+                                </Button>
+                                <Button variant="contained" onClick={handleNext} disabled={!answered}>
+                                    Next
+                                </Button>
+                            </Box>
+                        )}
+                    </>
                 )}
             </Box>
         </Box>
