@@ -182,32 +182,65 @@ function App() {
                 {/* Chế độ random → hiện 30 câu cùng lúc */}
                 {randomQuestions.length > 0 ? (
                     <>
-                        {visibleQuestions.map((q, index) => (
-                            <Card key={index} sx={{ mb: 3, boxShadow: 3, borderRadius: 3 }}>
-                                <CardContent>
-                                    <Typography component="span" sx={{ mb: 2, display: "block", fontWeight: "600" }}>
-                                        {index + 1}. {q.question}
-                                    </Typography>
-                                    <RadioGroup
-                                        value={answers[index] || ""}
-                                        onChange={(e) => handleChange(index, e.target.value)}
-                                    >
-                                        {q.options.map((option, i) => (
-                                            <FormControlLabel
-                                                key={i}
-                                                value={option}
-                                                control={<Radio />}
-                                                label={option}
-                                            />
-                                        ))}
-                                    </RadioGroup>
-                                </CardContent>
-                            </Card>
-                        ))}
+                        {visibleQuestions.map((q, index) => {
+                            return (
+                                <Card key={index} sx={{ mb: 3, boxShadow: 3, borderRadius: 3 }}>
+                                    <CardContent>
+                                        <Typography sx={{ mb: 2, fontWeight: "600" }}>
+                                            {index + 1}. {q.question}
+                                        </Typography>
+                                        <RadioGroup
+                                            value={answers[index] || ""}
+                                            onChange={(e) => handleChange(index, e.target.value)}
+                                        >
+                                            {q.options.map((option, i) => {
+                                                let optionColor = "inherit";
+                                                let bgColor = "transparent";
 
-                        <Button variant="contained" color="primary" onClick={handleSubmitRandom} fullWidth>
-                            Nộp bài
-                        </Button>
+                                                if (showResult) {
+                                                    if (option === q.answer) {
+                                                        optionColor = "green";
+                                                        bgColor = "#DFF2E0"; // nền xanh nhạt cho đáp án đúng
+                                                    } else if (answers[index] === option) {
+                                                        optionColor = "red";
+                                                        bgColor = "#FDE2E2"; // nền đỏ nhạt cho đáp án sai
+                                                    }
+                                                }
+
+                                                return (
+                                                    <FormControlLabel
+                                                        key={i}
+                                                        value={option}
+                                                        control={<Radio sx={{ color: optionColor }} />}
+                                                        disabled={showResult} // không cho đổi sau khi nộp
+                                                        label={
+                                                            <Typography
+                                                                sx={{
+                                                                    p: 1,
+                                                                    mb: 1,
+                                                                    borderRadius: "8px",
+                                                                    border: "1px solid #ccc",
+                                                                    color: optionColor,
+                                                                    backgroundColor: bgColor,
+                                                                }}
+                                                            >
+                                                                {option}
+                                                            </Typography>
+                                                        }
+                                                    />
+                                                );
+                                            })}
+                                        </RadioGroup>
+                                    </CardContent>
+                                </Card>
+                            );
+                        })}
+
+                        {!showResult && (
+                            <Button variant="contained" color="primary" onClick={handleSubmitRandom} fullWidth>
+                                Nộp bài
+                            </Button>
+                        )}
 
                         {showResult && (
                             <Typography variant="h5" sx={{ mt: 3, textAlign: "center", fontWeight: "bold" }}>
