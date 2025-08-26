@@ -1,11 +1,25 @@
 import React, { useState } from "react";
-import { Box, Button, Card, CardContent, Typography, Radio, RadioGroup, FormControlLabel } from "@mui/material";
+import {
+    Box,
+    Button,
+    Card,
+    CardContent,
+    Typography,
+    Radio,
+    RadioGroup,
+    FormControlLabel,
+    useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import quizData from "./questions.js";
 
 function App() {
     const [answers, setAnswers] = useState({});
     const [score, setScore] = useState(null);
-    const [selectedExam, setSelectedExam] = useState(1); // mặc định Đề 1
+    const [selectedExam, setSelectedExam] = useState(1);
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     const handleChange = (qIndex, value) => {
         setAnswers({ ...answers, [qIndex]: value });
@@ -20,7 +34,6 @@ function App() {
         setScore(newScore);
     };
 
-    // Cắt dữ liệu theo đề
     const startIndex = (selectedExam - 1) * 30;
     const endIndex = startIndex + 30;
     const visibleQuestions = quizData.slice(startIndex, endIndex);
@@ -31,22 +44,37 @@ function App() {
                 m: 0,
                 width: "100vw",
                 fontFamily: "Arial, sans-serif",
-                display: "flex",
                 bgcolor: "#F6F8FA",
                 minHeight: "100vh",
+                display: "flex",
+                flexDirection: isMobile ? "column" : "row",
             }}
         >
-            {/* Sidebar */}
+            {/* Sidebar or Topbar */}
             <Box
                 sx={{
                     bgcolor: "#E5F1DB",
-                    width: "250px",
-                    p: 3,
+                    width: isMobile ? "100%" : "250px",
+                    p: 2,
                     flexShrink: 0,
-                    borderRight: "2px solid #C8E0B2",
+                    borderRight: isMobile ? "none" : "2px solid #C8E0B2",
+                    borderBottom: isMobile ? "2px solid #C8E0B2" : "none",
+                    display: "flex",
+                    justifyContent: isMobile ? "center" : "flex-start",
+                    gap: 1,
+                    flexWrap: "wrap",
                 }}
             >
-                <Typography sx={{ fontSize: "18px", fontWeight: "700", color: "#4D8009", mb: 2 }}>
+                <Typography
+                    sx={{
+                        fontSize: "18px",
+                        fontWeight: "700",
+                        color: "#4D8009",
+                        mb: isMobile ? 1 : 2,
+                        width: "100%",
+                        textAlign: isMobile ? "center" : "left",
+                    }}
+                >
                     Danh sách đề thi
                 </Typography>
 
@@ -54,11 +82,10 @@ function App() {
                     <Button
                         key={exam}
                         variant={selectedExam === exam ? "contained" : "outlined"}
-                        fullWidth
                         sx={{
-                            mb: 2,
                             borderRadius: "10px",
                             fontWeight: "600",
+                            minWidth: isMobile ? "80px" : "100%",
                             bgcolor: selectedExam === exam ? "#4D8009" : "white",
                             color: selectedExam === exam ? "white" : "#4D8009",
                             "&:hover": {
@@ -76,18 +103,17 @@ function App() {
                 ))}
             </Box>
 
-            {/* Nội dung chính */}
+            {/* Main content */}
             <Box
                 sx={{
-                    p: 4,
+                    p: isMobile ? 2 : 4,
                     margin: "0 auto",
-                    fontFamily: "Arial, sans-serif",
                     maxWidth: "800px",
                     flexGrow: 1,
                 }}
             >
                 <Typography
-                    variant="h3"
+                    variant={isMobile ? "h5" : "h3"}
                     gutterBottom
                     textAlign="center"
                     sx={{ color: "primary.main", fontWeight: "bold", mb: 4 }}
@@ -104,12 +130,11 @@ function App() {
                                 mb: 3,
                                 boxShadow: 3,
                                 borderRadius: 3,
-                                transition: "transform 0.2s ease",
                                 "&:hover": { transform: "scale(1.01)" },
                             }}
                         >
                             <CardContent>
-                                <Typography variant="h6" sx={{ mb: 1, fontWeight: "600" }}>
+                                <Typography variant={isMobile ? "subtitle1" : "h6"} sx={{ mb: 1, fontWeight: "600" }}>
                                     {index + 1}. {q.question}
                                 </Typography>
                                 <RadioGroup
@@ -132,8 +157,8 @@ function App() {
                                                     <Typography
                                                         sx={{
                                                             p: 1,
+                                                            fontSize: isMobile ? "0.9rem" : "1rem",
                                                             color: optionColor,
-                                                            mb: 1,
                                                             borderRadius: "8px",
                                                             backgroundColor:
                                                                 score !== null && option === q.answer
@@ -161,7 +186,7 @@ function App() {
                     sx={{
                         py: 1.5,
                         borderRadius: "12px",
-                        fontSize: "1.1rem",
+                        fontSize: isMobile ? "1rem" : "1.1rem",
                         fontWeight: "bold",
                         mt: 2,
                     }}
@@ -171,9 +196,9 @@ function App() {
 
                 {score !== null && (
                     <Typography
-                        variant="h5"
+                        variant={isMobile ? "h6" : "h5"}
                         sx={{
-                            mt: 4,
+                            mt: 3,
                             textAlign: "center",
                             color: score > visibleQuestions.length / 2 ? "green" : "red",
                             fontWeight: "bold",
