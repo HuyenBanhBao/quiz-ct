@@ -117,7 +117,7 @@ function App() {
                         textAlign: "center",
                     }}
                 >
-                    Danh sách đề thi
+                    Đề ôn
                 </Typography>
 
                 {[1, 2, 3, 4].map((exam) => (
@@ -171,7 +171,7 @@ function App() {
             {/* Main content */}
             <Box sx={{ p: isMobile ? 2 : 4, margin: "0 auto", maxWidth: "800px", flexGrow: 1 }}>
                 <Typography
-                    variant={isMobile ? "h5" : "h3"}
+                    variant={isMobile ? "h6" : "h4"}
                     gutterBottom
                     textAlign="center"
                     sx={{ color: "primary.main", fontWeight: "bold", mb: 4 }}
@@ -221,7 +221,16 @@ function App() {
                         {!showResult ? (
                             <Card sx={{ mb: 3, boxShadow: 3, borderRadius: 3 }}>
                                 <CardContent>
-                                    <Typography component="span" sx={{ mb: 2, display: "block", fontWeight: "600" }}>
+                                    <Typography
+                                        component="span"
+                                        sx={{
+                                            mb: 2,
+                                            display: "block",
+                                            fontWeight: "600",
+                                            textAlign: "justify",
+                                            lineHeight: 1.6,
+                                        }}
+                                    >
                                         Câu {currentIndex + 1}: {currentQuestion.question}
                                     </Typography>
                                     <RadioGroup
@@ -245,13 +254,17 @@ function App() {
                                                     label={
                                                         <Typography
                                                             sx={{
+                                                                textAlign: "justify",
+                                                                lineHeight: 1.6,
                                                                 color: optionColor,
+                                                                border: `1px solid #ccc`,
+                                                                mb: 1,
                                                                 backgroundColor:
                                                                     answered && option === currentQuestion.answer
                                                                         ? "#DFF2E0"
                                                                         : "transparent",
                                                                 borderRadius: "8px",
-                                                                p: 0.5,
+                                                                p: 1,
                                                             }}
                                                         >
                                                             {option}
