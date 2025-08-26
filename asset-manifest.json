@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/quiz-ct/static/js/main.c3cab11d.js",
+    "index.html": "/quiz-ct/index.html",
+    "main.c3cab11d.js.map": "/quiz-ct/static/js/main.c3cab11d.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.c3cab11d.js"
+  ]
+}
