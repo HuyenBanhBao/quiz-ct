@@ -254,6 +254,7 @@ function App() {
                                                     label={
                                                         <Typography
                                                             sx={{
+                                                                display: "block",
                                                                 textAlign: "justify",
                                                                 lineHeight: 1.6,
                                                                 color: optionColor,
