@@ -654,7 +654,7 @@ const quizData = [
         options: [
             `A. Kiên định mục tiêu độc lập dân tộc và chủ nghĩa cộng sản.`,
             `B. Kiên định mục tiêu độc lập dân tộc và chủ nghĩa xã hội.`,
-            `C. Kiên định mục tiêu độc lập dân tộc và con đường đi lên chủ nghĩa xã hội.``,`,
+            `C. Kiên định mục tiêu độc lập dân tộc và con đường đi lên chủ nghĩa xã hội.`,
         ],
         answer: "B. Kiên định mục tiêu độc lập dân tộc và chủ nghĩa xã hội.",
     },
@@ -802,7 +802,7 @@ const quizData = [
         options: [
             `A. Lãnh đạo tuyệt đối, toàn diện các đơn vị thuộc quyền.`,
             `B. Lãnh đạo mọi mặt các đơn vị thuộc quyền.`,
-            `C. Lãnh đạo tuyệt đối, trực tiếp các đơn vị thuộc quyền.``,`,
+            `C. Lãnh đạo tuyệt đối, trực tiếp các đơn vị thuộc quyền.`,
         ],
         answer: "B. Lãnh đạo mọi mặt các đơn vị thuộc quyền.",
     },
@@ -923,7 +923,7 @@ const quizData = [
         options: [
             `A. Chế độ trực chỉ huy được tổ chức từ cấp Viện KH&CNQS đến cấp phòng nghiên cứu.`,
             `B. Chế độ trực chỉ huy được tổ chức từ cấp Viện KH&CNQS đến đầu mối trực thuộc Viện.`,
-            `C. Chế độ trực chỉ huy được tổ chức ở cấp Viện KH&CNQS.``,`,
+            `C. Chế độ trực chỉ huy được tổ chức ở cấp Viện KH&CNQS.`,
         ],
         answer: "A. Chế độ trực chỉ huy được tổ chức từ cấp Viện KH&CNQS đến cấp phòng nghiên cứu.",
     },
@@ -1083,7 +1083,7 @@ const quizData = [
     },
     {
         question: ` Nghị quyết số 05-NQ/TW ngày 07/4/2026 của Ban Chấp hành Trung ương Đảng về đổi mới, nâng cao hiệu lực công tác kiểm tra, giám sát và kỷ luật của Đảng xác định bao nhiêu nhiệm vụ, giải pháp?`,
-        options: [`A. 5 nhiệm vụ, giải pháp.`, `B. 6 nhiệm vụ, giải pháp.`, `C. 7 nhiệm vụ, giải pháp.`, ``],
+        options: [`A. 5 nhiệm vụ, giải pháp.`, `B. 6 nhiệm vụ, giải pháp.`, `C. 7 nhiệm vụ, giải pháp.`],
         answer: "B. 6 nhiệm vụ, giải pháp.",
     },
     {
@@ -1115,7 +1115,6 @@ const quizData = [
             `A. Cơ quan kiểm soát tài sản, thu nhập của Đảng là cơ quan nhân sự các cấp.`,
             `B. Cơ quan kiểm soát tài sản, thu nhập của Đảng là ủy ban kiểm tra cấp ủy cấp cơ sở trở lên.`,
             `C. Cơ quan kiểm soát tài sản, thu nhập của Đảng là ủy ban kiểm tra cấp ủy cấp trên trực tiếp cơ sở trở lên.`,
-            ``,
         ],
         answer: "C. Cơ quan kiểm soát tài sản, thu nhập của Đảng là ủy ban kiểm tra cấp ủy cấp trên trực tiếp cơ sở trở lên.",
     },
