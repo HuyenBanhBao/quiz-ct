@@ -249,7 +249,7 @@ input {
 }
 
 .single-question-card.MuiCard-root {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .single-question-card .question-card-content.MuiCardContent-root {
@@ -541,7 +541,7 @@ input {
     }
 
     .main-content {
-        padding: 25px 14px 54px;
+        padding: 8px 8px 20px;
     }
 
     .single-layout .main-content {
@@ -612,7 +612,7 @@ input {
     }
 
     .page-header {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .eyebrow.MuiTypography-root {
@@ -629,7 +629,7 @@ input {
     }
 
     .progress-bar.MuiLinearProgress-root {
-        margin-top: 15px;
+        margin-top: 5px;
     }
 
     .question-card.MuiCard-root {
@@ -640,12 +640,12 @@ input {
 
     .question-card-content.MuiCardContent-root,
     .single-question-card .question-card-content.MuiCardContent-root {
-        padding: 18px 15px;
+        padding: 10px 10px;
     }
 
     .question-card-content.MuiCardContent-root:last-child,
     .single-question-card .question-card-content.MuiCardContent-root:last-child {
-        padding-bottom: 18px;
+        padding-bottom: 10px;
     }
 
     .question-number {
@@ -661,7 +661,7 @@ input {
     }
 
     .single-question-text.MuiTypography-root {
-        margin-top: 20px;
+        margin-top: 8px;
         font-size: 1rem;
     }
 
