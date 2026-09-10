@@ -117,7 +117,7 @@ const quizData = [
             `C. Tư duy "chạy theo thành tích", "báo cáo ảo"`,
             `D. "Tư duy nhiệm kỳ", "lợi ích nhóm" chưa được khắc phục triệt để.`,
         ],
-        answer: "D. 'Tư duy nhiệm kỳ', 'lợi ích nhóm' chưa được khắc phục triệt để.",
+        answer: 'D. "Tư duy nhiệm kỳ", "lợi ích nhóm" chưa được khắc phục triệt để.',
     },
     {
         question: ` Văn kiện Đại hội lần thứ XIV của Đảng đánh giá vai trò giám sát của lực lượng nào chưa được phát huy hiệu quả (nêu trong phần nguyên nhân)?`,
@@ -995,7 +995,7 @@ const quizData = [
             `C. Hai năm một lần.`,
             `D. Khi có yêu cầu của cấp có thẩm quyền.`,
         ],
-        answer: "B. Hằng năm",
+        answer: "B. Hằng năm.",
     },
     {
         question: ` Theo quy định của Luật Sĩ quan Quân đội nhân dân Việt Nam hiện nay, quy định hạn tuổi cao nhất của sĩ quan phục vụ tại ngũ theo cấp bậc quân hàm như thế nào?`,
@@ -1096,7 +1096,7 @@ const quizData = [
         options: [
             `A. Nâng cao nhận thức trách nhiệm của cấp ủy, tổ chức đảng, ủy ban kiểm tra các cấp về công tác kiểm tra, giám sát và kỷ luật của Đảng.`,
             `B. Nâng cao nhận thức trách nhiệm của cán bộ, đảng viên về công tác kiểm tra, giám sát và kỷ luật của Đảng.`,
-            `C. Nâng cao nhận thức trách nhiệm của cấp ủy, tổ chức đảng, ủy ban kiểm tra các cấp, cán bộ, đảng viên về công tác kiểm tra, giám sát và kỷ luật của Đảng.,`,
+            `C. Nâng cao nhận thức trách nhiệm của cấp ủy, tổ chức đảng, ủy ban kiểm tra các cấp, cán bộ, đảng viên về công tác kiểm tra, giám sát và kỷ luật của Đảng.`,
         ],
         answer: "C. Nâng cao nhận thức trách nhiệm của cấp ủy, tổ chức đảng, ủy ban kiểm tra các cấp, cán bộ, đảng viên về công tác kiểm tra, giám sát và kỷ luật của Đảng.",
     },
@@ -1141,7 +1141,7 @@ const quizData = [
         options: [
             `A. Những nội dung liên quan đến tiêu chuẩn đảng viên, tiêu chuẩn cấp ủy viên và thực hiện nhiệm vụ đảng viên.`,
             `B. Việc chấp hành chủ trương, quy định của Đảng, pháp luật của Nhà nước; về nguyên tắc tổ chức và sinh hoạt đảng, thực hiện chức trách, nhiệm vụ, quyền hạn và phẩm chất, đạo đức lối sống của cán bộ, đảng viên; về thực hiện trách nhiệm nêu gương; về “tự diễn biến”, “tự chuyển hóa”.`,
-            `C. Tất cả các phương án trên.,`,
+            `C. Tất cả các phương án trên.`,
         ],
         answer: "C. Tất cả các phương án trên.",
     },
@@ -1152,7 +1152,7 @@ const quizData = [
             `B. 90 ngày, được gia hạn 1 lần nhưng không quá 30 ngày.`,
             `C. 120 ngày, được gia hạn 1 lần nhưng không quá 30 ngày.`,
         ],
-        answer: "B. 90 ngày, được gia hạn 1 lần nhưng không quá 30 ngày.`",
+        answer: "B. 90 ngày, được gia hạn 1 lần nhưng không quá 30 ngày.",
     },
     {
         question: ` Các hình thức kỷ luật đối với tổ chức đảng có vi phạm?`,
@@ -1368,10 +1368,10 @@ const quizData = [
     {
         question: ` Đồng chí cho biết, Nghị quyết số 26-NQ/TW ngày 22/8/2026 của Bộ Chính trị có tiêu đề là gì?`,
         options: [
-            `A.	"Đẩy mạnh học tập, thực hành tư tưởng, đạo đức, phương pháp, phong cách Hồ Chí Minh trong giai đoạn phát triển mới".`,
-            `B.	Về phát triển du lịch Việt Nam trở thành ngành kinh tế mũi nhọn trong kỷ nguyên mới.`,
-            `C.	Về phát triển giáo dục, đào tạo Việt Nam trong kỷ nguyên mới.`,
-            `D.	Về Chiến lược công tác tư tưởng trong giai đoạn phát triển mới.`,
+            `A. "Đẩy mạnh học tập, thực hành tư tưởng, đạo đức, phương pháp, phong cách Hồ Chí Minh trong giai đoạn phát triển mới".`,
+            `B. Về phát triển du lịch Việt Nam trở thành ngành kinh tế mũi nhọn trong kỷ nguyên mới.`,
+            `C. Về phát triển giáo dục, đào tạo Việt Nam trong kỷ nguyên mới.`,
+            `D. Về Chiến lược công tác tư tưởng trong giai đoạn phát triển mới.`,
         ],
         answer: "B. Về phát triển du lịch Việt Nam trở thành ngành kinh tế mũi nhọn trong kỷ nguyên mới.",
     },
@@ -1398,13 +1398,33 @@ const quizData = [
     {
         question: ` Đồng chí cho biết, Nghị quyết số 23-NQ/TW ngày 02/8/2026 của Bộ Chính trị có tiêu đề là gì?`,
         options: [
-            `A.	Về công tác người Việt Nam ở nước ngoài.`,
-            `B.	Về phát triển du lịch Việt Nam trở thành ngành kinh tế mũi nhọn trong kỷ nguyên mới.`,
-            `C.	Về phát triển các vùng và tổ chức không gian phát triển quốc gia trong giai đoạn mới.`,
-            `D.	Về Chiến lược công tác tư tưởng trong bối cảnh mới.`,
+            `A. Về công tác người Việt Nam ở nước ngoài.`,
+            `B. Về phát triển du lịch Việt Nam trở thành ngành kinh tế mũi nhọn trong kỷ nguyên mới.`,
+            `C. Về phát triển các vùng và tổ chức không gian phát triển quốc gia trong giai đoạn mới.`,
+            `D. Về Chiến lược công tác tư tưởng trong bối cảnh mới.`,
         ],
-        answer: "A.	Về công tác người Việt Nam ở nước ngoài.",
+        answer: "A. Về công tác người Việt Nam ở nước ngoài.",
     },
+    // {
+    //     id: 1,
+    //     question: "Chủ đề Đại hội XIV của Đảng được xác định là gì?",
+    //     options: [
+    //         { label: "A", text: "Đoàn kết - Dân chủ - Kỷ cương - Phát triển.", sourceLabel: "A" },
+    //         { label: "B", text: "Kiên định mục tiêu độc lập dân tộc và chủ nghĩa xã hội.", sourceLabel: "B" },
+    //         {
+    //             label: "C",
+    //             text: "Dưới lá cờ vẻ vang của Đảng, chung sức, đồng lòng thực hiện thắng lợi các mục tiêu phát triển đất nước đến năm 2030; tự chủ chiến lược, tự cường, tự tin, tiến mạnh trong kỷ nguyên vươn mình của dân tộc, vì hòa bình, độc lập, dân chủ, phồn vinh, hạnh phúc, vững bước đi lên chủ nghĩa xã hội.",
+    //             sourceLabel: "C",
+    //         },
+    //         {
+    //             label: "D",
+    //             text: "Xây dựng Đảng và hệ thống chính trị trong sạch, vững mạnh toàn diện; phát triển nhanh và bền vững đất nước.",
+    //             sourceLabel: "D",
+    //         },
+    //     ],
+    //     pages: [1],
+    //     answer: "C",
+    // },
 ];
 
 export default quizData;
